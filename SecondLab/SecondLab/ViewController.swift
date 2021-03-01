@@ -21,6 +21,19 @@ class ViewController: UIViewController {
     var operation: String = ""
     var dotFlag = false;
     
+    var currValue: Double {
+        get {
+            return Double(resultLabel.text!)!
+        }
+        
+        set {
+            resultLabel.text = "\(newValue)"
+            typingFlag = false
+            firstOperand = currValue
+        }
+    }
+    
+    
     @IBAction func enterDigit(_ sender: UIButton) {
         
         let number = sender.currentTitle!
@@ -41,17 +54,39 @@ class ViewController: UIViewController {
     }
     
     @IBAction func enterOperation(_ sender: UIButton) {
-        firstOperand = Double(resultLabel.text!)!
+  
         typingFlag = false
-        operation = sender.currentTitle!
         dotFlag = false
+        print(sender.currentTitle!)
+        print("Second" + "\(secondOpearnd)")
+        
+        if(operation != "") {
+            switch operation {
+                case "+":
+                    print(secondOpearnd)
+                    currValue = currValue + firstOperand
+                case "-":
+                    currValue = firstOperand - currValue
+                case "*":
+                    currValue = firstOperand * currValue
+                case "/":
+                currValue = firstOperand / currValue
+                default:
+                    break
+            }
+        } else {
+            firstOperand = currValue
+        }
+        
+        operation = sender.currentTitle!
+        
     }
     
     
     @IBAction func enterEquality(_ sender: UIButton) {
         
         if(typingFlag == true) {
-            secondOpearnd = Double(resultLabel.text!)!
+            secondOpearnd = currValue
         }
         
         switch operation {
@@ -69,6 +104,8 @@ class ViewController: UIViewController {
         
         typingFlag = false
         dotFlag = false
+        operation = ""
+        
     }
     
     
@@ -82,13 +119,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeNumSign(_ sender: UIButton) {
-        let newValue: Double =  -Double(resultLabel.text!)!
+        let newValue: Double =  -currValue
         resultLabel.text = "\(newValue)"
     }
     
     @IBAction func percentageButton(_ sender: UIButton) {
         if(firstOperand == 0) {
-            resultLabel.text = "\(Double(resultLabel.text!)! / 100)"
+            resultLabel.text = "\(currValue / 100)"
+            operation = ""
         } else {
             
         }
