@@ -1,70 +1,59 @@
 //
 //  ViewController.swift
-//  Project
+//  FinalProject
 //
 //  Created by user193967 on 3/29/21.
 //
 
 import UIKit
 
-
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
- 
+    
     
     @IBOutlet weak var tableView: UITableView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate)
         .persistentContainer.viewContext
 
-    
- /*  let tableView: UITableView = {
-        let table = UITableView()
-        
-        table.register(UITableViewCell.self,
-                        forCellReuseIdentifier: "cell")
-        
-        return table
-    }()*/
-
-    
     private var models = [NoteItem]()
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Ветеринарные осмотры"
-        
         gettAllNotes()
-        
-        let nib = UINib(nibName: "NoteCell", bundle: nil)
-        tableView.register(nib,
-                           forCellReuseIdentifier: "NoteCell")
-        
-        
         tableView.delegate = self
         tableView.dataSource = self
-      /*  tableView.frame = view.bounds*/
+        
+        title = "Vet notes"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(didTapAdd))
     }
     
+    
     @objc private func didTapAdd() {
         let alert = UIAlertController(title: "New Item",
                                       message: "Enter new item",
                                       preferredStyle: .alert)
         
-        alert.addTextField(configurationHandler: nil)
+        alert.addTextField { (textField) in textField.text = "Вакцинация от сибирской язвы"}
+        
         
         alert.addAction(UIAlertAction(title: "Submit", style: .cancel, handler: { [weak self] _ in
-            guard let field = alert.textFields?.first, let text = field.text, !text.isEmpty else {
+            guard let field = alert.textFields?.first,
+                  let text = field.text,
+            
+                  !text.isEmpty else {
                                         return
                                       }
                                         
-            self?.createNote(price: 3000, vetName: "Suchova", title: text, content: "osmotr")
+            self?.createNote(title: text)
         }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         
         present(alert, animated: true)
     }
@@ -74,14 +63,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let model = models[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteCell
+        cell.textLabel?.text = models[indexPath.row].title
         
-        cell.price.text = String(model.price)
-        cell.content.text = model.title
-     //   priceCell.textLabel?.text = String(model.price)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+    
         
+        cell.detailTextLabel?.text = dateFormatter.string(from: models[indexPath.row].date! as Date)
         return cell
     }
     
@@ -117,12 +107,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func createNote(price: Int32, vetName: String, title: String, content: String) {
+    func createNote(title: String) {
         let newNote = NoteItem(context: context)
-        newNote.price = price
-        newNote.vetName = vetName
+
         newNote.title = title
-        newNote.content = content
         newNote.date = Date()
         
         do {
@@ -144,5 +132,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         }
     }
+
 }
 
