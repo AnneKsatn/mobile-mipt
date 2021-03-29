@@ -13,7 +13,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
+    
+    func gettAllNotes() {
+        
+    }
+    
+    func createNote() {
+        
+    }
+    
+    func deleteNote(note: NoteItem) {
+        
+    }
+    
+    func updateNote(note: NoteItem){
+        
+    }
 }
 
