@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -94,7 +95,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func gettAllNotes() {
         do {
             
-            models = try context.fetch(NoteItem.fetchRequest())
+            let selectionSort = NSSortDescriptor(key: "date", ascending: false)
+            let sortDescriptors = [selectionSort]
+            var fetchRequest:NSFetchRequest<NoteItem> = NoteItem.fetchRequest()
+            
+            fetchRequest.sortDescriptors = sortDescriptors
+
+            
+            models = try context.fetch(fetchRequest)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
