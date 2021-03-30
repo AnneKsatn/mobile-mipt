@@ -34,10 +34,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    
+    
+    
     @objc private func didTapAdd() {
+        
+       /* let datePicker: UIDatePicker = UIDatePicker()
+        
+        datePicker.datePickerMode = .date
+        datePicker.frame = CGRect(x:0, y:15, width: 270, height:100)
+        
         let alert = UIAlertController(title: "New Item",
                                       message: "Enter new item",
                                       preferredStyle: .alert)
+        
+        alert.view.addSubview(datePicker)
         
         alert.addTextField { (textField) in textField.text = "Вакцинация от сибирской язвы"}
         
@@ -54,8 +65,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+    
         
         present(alert, animated: true)
+ */
+        guard let vc = storyboard?.instantiateViewController(identifier: "new") as? EntryViewController else {
+            return
+        }
+        
+        vc.title = "new note"
+        navigationController?.pushViewController(vc, animated: true)
+        
+        vc.completion = {noteTitle in
+            self.navigationController?.popToRootViewController(animated: true)
+            self.createNote(title: noteTitle)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
