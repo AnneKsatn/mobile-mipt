@@ -81,7 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return UITableView.automaticDimension
     }
     
-    func gettAllNotes() {
+   func gettAllNotes() {
         do {
             let selectionSort = NSSortDescriptor(key: "date", ascending: false)
             
