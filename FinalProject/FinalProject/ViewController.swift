@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         
-        title = "Vet notes"
+        title = "Ветеринария"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
@@ -49,8 +49,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.completion = {noteTitle, date in
             self.navigationController?.popToRootViewController(animated: true)
             
-            print(date)
-            self.createNote(title: noteTitle)
+            self.createNote(title: noteTitle, date: date)
         }
     }
     
@@ -94,6 +93,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func gettAllNotes() {
         do {
+            
             models = try context.fetch(NoteItem.fetchRequest())
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -103,11 +103,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func createNote(title: String) {
+    func createNote(title: String, date: Date) {
         let newNote = NoteItem(context: context)
 
         newNote.title = title
-        newNote.date = Date()
+        newNote.date = date
         
         do {
             try context.save()
