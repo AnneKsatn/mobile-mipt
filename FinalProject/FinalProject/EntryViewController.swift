@@ -20,7 +20,6 @@ class EntryViewController: UIViewController {
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(didTapSave))
-
     }
     
     @objc func didTapSave() {

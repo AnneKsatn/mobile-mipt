@@ -10,15 +10,12 @@ import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    
     @IBOutlet weak var tableView: UITableView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate)
         .persistentContainer.viewContext
 
     private var models = [NoteItem]()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +25,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         
         title = "Ветеринария"
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(didTapAdd))
     }
-    
-    
-    
-    
-    
+
     @objc private func didTapAdd() {
         
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? EntryViewController else {
@@ -47,9 +39,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.title = "новые данные"
         navigationController?.pushViewController(vc, animated: true)
         
-        vc.completion = {noteTitle, date in
+        vc.completion = { noteTitle, date in
             self.navigationController?.popToRootViewController(animated: true)
-            
             self.createNote(title: noteTitle, date: date)
         }
     }
@@ -59,14 +50,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = models[indexPath.row].title
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy"
-    
-        
+
         cell.detailTextLabel?.text = dateFormatter.string(from: models[indexPath.row].date! as Date)
         return cell
     }
@@ -91,23 +81,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return UITableView.automaticDimension
     }
     
-    
     func gettAllNotes() {
         do {
-            
             let selectionSort = NSSortDescriptor(key: "date", ascending: false)
-            let sortDescriptors = [selectionSort]
-            var fetchRequest:NSFetchRequest<NoteItem> = NoteItem.fetchRequest()
             
-            fetchRequest.sortDescriptors = sortDescriptors
-
+            let fetchRequest:NSFetchRequest<NoteItem> = NoteItem.fetchRequest()
+            fetchRequest.sortDescriptors = [selectionSort]
             
             models = try context.fetch(fetchRequest)
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         } catch {
-            //error
+            print("Error while getting notes")
         }
     }
     
@@ -121,7 +108,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             try context.save()
             gettAllNotes()
         } catch {
-            
+            print("Error while creating note")
         }
     }
     
@@ -133,7 +120,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             try context.save()
             gettAllNotes()
         } catch {
-            
+            print("Error while deleting note")
         }
     }
 
