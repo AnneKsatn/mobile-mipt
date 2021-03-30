@@ -39,45 +39,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @objc private func didTapAdd() {
         
-       /* let datePicker: UIDatePicker = UIDatePicker()
-        
-        datePicker.datePickerMode = .date
-        datePicker.frame = CGRect(x:0, y:15, width: 270, height:100)
-        
-        let alert = UIAlertController(title: "New Item",
-                                      message: "Enter new item",
-                                      preferredStyle: .alert)
-        
-        alert.view.addSubview(datePicker)
-        
-        alert.addTextField { (textField) in textField.text = "Вакцинация от сибирской язвы"}
-        
-        
-        alert.addAction(UIAlertAction(title: "Submit", style: .cancel, handler: { [weak self] _ in
-            guard let field = alert.textFields?.first,
-                  let text = field.text,
-            
-                  !text.isEmpty else {
-                                        return
-                                      }
-                                        
-            self?.createNote(title: text)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-    
-        
-        present(alert, animated: true)
- */
         guard let vc = storyboard?.instantiateViewController(identifier: "new") as? EntryViewController else {
             return
         }
         
-        vc.title = "new note"
+        vc.title = "новые данные"
         navigationController?.pushViewController(vc, animated: true)
         
-        vc.completion = {noteTitle in
+        vc.completion = {noteTitle, date in
             self.navigationController?.popToRootViewController(animated: true)
+            
+            print(date)
             self.createNote(title: noteTitle)
         }
     }

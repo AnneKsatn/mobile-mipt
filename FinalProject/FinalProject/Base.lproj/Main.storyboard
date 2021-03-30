@@ -73,8 +73,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="sgu-2Z-Lg3">
+                                <rect key="frame" x="40" y="108" width="334" height="216"/>
+                            </datePicker>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i2f-Ox-5zl">
-                                <rect key="frame" x="0.0" y="44" width="414" height="34"/>
+                                <rect key="frame" x="20" y="64" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -82,12 +85,16 @@
                         <viewLayoutGuide key="safeArea" id="PyC-sW-W96"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="i2f-Ox-5zl" firstAttribute="top" secondItem="PyC-sW-W96" secondAttribute="top" id="7xU-fQ-l78"/>
-                            <constraint firstItem="PyC-sW-W96" firstAttribute="trailing" secondItem="i2f-Ox-5zl" secondAttribute="trailing" id="Ktg-Ya-1eS"/>
-                            <constraint firstItem="i2f-Ox-5zl" firstAttribute="leading" secondItem="PyC-sW-W96" secondAttribute="leading" id="xTQ-Cf-Qw5"/>
+                            <constraint firstItem="PyC-sW-W96" firstAttribute="trailing" secondItem="sgu-2Z-Lg3" secondAttribute="trailing" constant="40" id="CEQ-6D-qeE"/>
+                            <constraint firstItem="sgu-2Z-Lg3" firstAttribute="leading" secondItem="PyC-sW-W96" secondAttribute="leading" constant="40" id="H1m-T5-bcS"/>
+                            <constraint firstItem="sgu-2Z-Lg3" firstAttribute="top" secondItem="i2f-Ox-5zl" secondAttribute="bottom" constant="10" id="Hh0-lg-Ay4"/>
+                            <constraint firstItem="PyC-sW-W96" firstAttribute="trailing" secondItem="i2f-Ox-5zl" secondAttribute="trailing" constant="20" id="JYM-Zo-5HY"/>
+                            <constraint firstItem="i2f-Ox-5zl" firstAttribute="leading" secondItem="PyC-sW-W96" secondAttribute="leading" constant="20" id="K8I-98-pzM"/>
+                            <constraint firstItem="i2f-Ox-5zl" firstAttribute="top" secondItem="PyC-sW-W96" secondAttribute="top" constant="20" id="xeC-CI-9gG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="datePicker" destination="sgu-2Z-Lg3" id="gxr-eT-cQt"/>
                         <outlet property="titleField" destination="i2f-Ox-5zl" id="TrH-xa-zwV"/>
                     </connections>
                 </viewController>

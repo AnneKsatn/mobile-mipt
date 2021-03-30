@@ -1,32 +1,31 @@
-//
-//  EntryViewController.swift
-//  FinalProject
-//
-//  Created by user193967 on 3/30/21.
-//
+
 
 import UIKit
 
 class EntryViewController: UIViewController {
     
     @IBOutlet var titleField: UITextField!
-    public var completion: ((String) -> Void)?
+    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    public var completion: ((String, Date) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .inline
+        
         titleField.becomeFirstResponder()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "сохранить",
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(didTapSave))
 
-        // Do any additional setup after loading the view.
     }
     
     @objc func didTapSave() {
         if let text = titleField.text, !text.isEmpty {
-            completion?(text)
+            completion?(text, datePicker.date)
         }
     }
 }
