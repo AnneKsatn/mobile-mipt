@@ -28,8 +28,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d0a2cd0-95f1-4f1b-aad7-8c899a33a5ee" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AppAndroid/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../AppAndroid/app/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AppAndroid/app/src/main/java/com/example/appandroid/LoginActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../AppAndroid/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AppAndroid/app/src/main/java/com/example/appandroid/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../AppAndroid/app/src/main/java/com/example/appandroid/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AppAndroid/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../AppAndroid/app/src/main/res/layout/activity_main.xml" afterDir="false" />
     </list>
