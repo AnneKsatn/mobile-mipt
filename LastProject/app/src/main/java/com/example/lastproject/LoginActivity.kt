@@ -2,6 +2,8 @@ package com.example.lastproject
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -11,8 +13,12 @@ class LoginActivity: AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         btn_login.setOnClickListener {
-            val email_login = email_login.text.toString()
-            val password_login = password_login.text.toString()
+            val email = email_login.text.toString()
+            val password = password_login.text.toString()
+
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+//                .addOnCompleteListener()
+//                .ad
         }
 
         go_to_redistr.setOnClickListener {
