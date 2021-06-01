@@ -8,33 +8,20 @@
 
     <EditText
         android:id="@+id/email_registr"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/username_registr"
-        app:layout_constraintStart_toStartOf="@+id/username_registr"
-        app:layout_constraintTop_toBottomOf="@+id/username_registr" />
-
-    <EditText
-        android:id="@+id/username_registr"
         android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/password_registr"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Password"
@@ -46,7 +33,7 @@
     <Button
         android:id="@+id/btn_registr"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginTop="32dp"
         android:text="Регистрация"
         app:layout_constraintEnd_toEndOf="@+id/password_registr"

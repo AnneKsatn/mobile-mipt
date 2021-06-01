@@ -50,5 +50,3 @@ class MainActivity : AppCompatActivity() {
             }
     }
 }
-
-class User(val email: String, val uid: String)
