@@ -21,7 +21,7 @@ class NewNoteActivity : AppCompatActivity() {
             val title = new_note_title.text.toString()
             val content = new_note_content.text.toString()
 
-            var model = DatabaseModel(title, content)
+            var model = DatabaseModel(title, content, id)
             myRef.child(id!!).setValue(model)
 
             val intent = Intent(this, ListActivity::class.java)

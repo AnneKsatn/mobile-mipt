@@ -49,6 +49,8 @@ class ListActivity : AppCompatActivity() {
                     val intent = Intent(view.context, ShowNoteActivity::class.java)
                     intent.putExtra("title", noteItem.note.title)
                     intent.putExtra("content",  noteItem.note.content)
+
+                    intent.putExtra("id",  noteItem.note.id)
                     startActivity(intent)
                 }
 
