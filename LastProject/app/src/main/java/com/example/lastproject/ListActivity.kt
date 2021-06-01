@@ -11,6 +11,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_list.*
 
 class ListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +34,13 @@ class ListActivity : AppCompatActivity() {
                     val model = data.getValue(DatabaseModel::class.java)
                     list.add(model as DatabaseModel)
 
-                    Log.d("Main", model.title.toString())
+//                    Log.d("Main", model.title.toString())
+
+                }
+
+                if (list.size > 0) {
+                    val adapter = DataAdapter(list)
+                    recycleview.adapter = adapter
                 }
             }
         })
