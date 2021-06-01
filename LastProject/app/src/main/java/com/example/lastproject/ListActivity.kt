@@ -3,7 +3,6 @@ package com.example.lastproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
@@ -53,7 +52,6 @@ class ListActivity : AppCompatActivity() {
                     val intent = Intent(view.context, ShowNoteActivity::class.java)
                     intent.putExtra("title", noteItem.note.title)
                     intent.putExtra("content",  noteItem.note.content)
-
                     intent.putExtra("id",  noteItem.note.id)
                     startActivity(intent)
                 }

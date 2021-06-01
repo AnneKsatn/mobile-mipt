@@ -28,10 +28,9 @@ class ShowNoteActivity : AppCompatActivity() {
         val myRef = database.getReference("notes/" + uid.toString())
 
         save_btn.setOnClickListener {
-            val uid = FirebaseAuth.getInstance().uid
-            var model = DatabaseModel(title_edit.text.toString(), content_edit.text.toString(), id, uid)
-            myRef.child(id!!).setValue(model)
 
+            var model = DatabaseModel(title_edit.text.toString(), content_edit.text.toString(), id)
+            myRef.child(id!!).setValue(model)
             finish()
         }
 
