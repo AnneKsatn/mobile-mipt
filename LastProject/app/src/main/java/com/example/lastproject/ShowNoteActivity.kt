@@ -31,5 +31,11 @@ class ShowNoteActivity : AppCompatActivity() {
 
             finish()
         }
+
+
+        delete_btn.setOnClickListener {
+            myRef.child(id!!).removeValue();
+            finish()
+        }
     }
 }

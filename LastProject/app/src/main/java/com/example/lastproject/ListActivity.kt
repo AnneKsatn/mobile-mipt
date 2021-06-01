@@ -15,12 +15,16 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_list.*
-import kotlinx.android.synthetic.main.rv_layout.view.*
+//import kotlinx.android.synthetic.main.rv_layout.view.*
+
+import kotlinx.android.synthetic.main.note_row.view.*
 
 class ListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+
+        checkIsUserLogged()
 
         val database = FirebaseDatabase.getInstance()
         val ref = database.getReference("notes")
