@@ -32,7 +32,7 @@ class ListActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                val list=ArrayList<DatabaseModel>()
+
                 val adapter = GroupAdapter<ViewHolder>()
 
                 for(data in snapshot.children) {
@@ -42,6 +42,16 @@ class ListActivity : AppCompatActivity() {
                         adapter.add(NoteItem(model))
                     }
                 }
+
+                adapter.setOnItemClickListener { item, view ->
+
+                    val noteItem = item as NoteItem
+                    val intent = Intent(view.context, ShowNoteActivity::class.java)
+                    intent.putExtra("title", noteItem.note.title)
+                    intent.putExtra("content",  noteItem.note.content)
+                    startActivity(intent)
+                }
+
                 recycleview.adapter = adapter
             }
         })
