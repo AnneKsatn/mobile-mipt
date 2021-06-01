@@ -1,10 +1,10 @@
 package com.example.lastproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_new_note.*
 
 class NewNoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,9 +14,20 @@ class NewNoteActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("notes")
 
-        var id = myRef.push().key
+        new_note_btn.setOnClickListener {
 
-        var model = DatabaseModel("TITLE", "CONTENT")
-        myRef.child(id!!).setValue(model)
+            var id = myRef.push().key
+
+            val title = new_note_title.text.toString()
+            val content = new_note_content.text.toString()
+
+            var model = DatabaseModel(title, content)
+            myRef.child(id!!).setValue(model)
+
+            val intent = Intent(this, ListActivity::class.java)
+            intent.flags =
+                Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 }

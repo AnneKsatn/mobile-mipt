@@ -11,7 +11,11 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.rv_layout.view.*
 
 class ListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,19 +33,16 @@ class ListActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 val list=ArrayList<DatabaseModel>()
+                val adapter = GroupAdapter<ViewHolder>()
 
                 for(data in snapshot.children) {
                     val model = data.getValue(DatabaseModel::class.java)
-                    list.add(model as DatabaseModel)
 
-//                    Log.d("Main", model.title.toString())
-
+                    if(model != null) {
+                        adapter.add(NoteItem(model))
+                    }
                 }
-
-                if (list.size > 0) {
-                    val adapter = DataAdapter(list)
-                    recycleview.adapter = adapter
-                }
+                recycleview.adapter = adapter
             }
         })
     }
@@ -82,5 +83,16 @@ class ListActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+}
+
+class NoteItem(val note: DatabaseModel): Item<ViewHolder>() {
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.title.text = note.title
+        viewHolder.itemView.content.text = note.content
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.note_row
     }
 }
