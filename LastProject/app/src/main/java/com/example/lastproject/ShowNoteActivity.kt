@@ -3,6 +3,7 @@ package com.example.lastproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -22,11 +23,13 @@ class ShowNoteActivity : AppCompatActivity() {
         title_edit.setText(title)
         content_edit.setText(content)
 
+        val uid = FirebaseAuth.getInstance().uid
         val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("notes")
+        val myRef = database.getReference("notes/" + uid.toString())
 
         save_btn.setOnClickListener {
-            var model = DatabaseModel(title_edit.text.toString(), content_edit.text.toString(), id)
+            val uid = FirebaseAuth.getInstance().uid
+            var model = DatabaseModel(title_edit.text.toString(), content_edit.text.toString(), id, uid)
             myRef.child(id!!).setValue(model)
 
             finish()

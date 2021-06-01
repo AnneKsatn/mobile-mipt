@@ -3,6 +3,7 @@ package com.example.lastproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_new_note.*
 
@@ -12,7 +13,10 @@ class NewNoteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_note)
 
         val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("notes")
+
+        val uid = FirebaseAuth.getInstance().uid
+
+        val myRef = database.getReference("notes/" + uid.toString())
 
         new_note_btn.setOnClickListener {
 
@@ -21,7 +25,9 @@ class NewNoteActivity : AppCompatActivity() {
             val title = new_note_title.text.toString()
             val content = new_note_content.text.toString()
 
-            var model = DatabaseModel(title, content, id)
+            val uid = FirebaseAuth.getInstance().uid
+
+            var model = DatabaseModel(title, content, id, uid)
             myRef.child(id!!).setValue(model)
 
             val intent = Intent(this, ListActivity::class.java)

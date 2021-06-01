@@ -15,7 +15,6 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_list.*
-//import kotlinx.android.synthetic.main.rv_layout.view.*
 
 import kotlinx.android.synthetic.main.note_row.view.*
 
@@ -27,7 +26,8 @@ class ListActivity : AppCompatActivity() {
         checkIsUserLogged()
 
         val database = FirebaseDatabase.getInstance()
-        val ref = database.getReference("notes")
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = database.getReference("notes/" + uid.toString())
 
 
         ref.addValueEventListener(object : ValueEventListener {
